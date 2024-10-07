@@ -1,0 +1,15 @@
+#!/bin/bash
+#$ -cwd           # Set the working directory for the job to the current directory
+#$ -j y                   ## Create an output file with errors etc.
+#$ -pe smp 1      # Request 1 core
+#$ -l h_rt=6:0:0  # Request 6 hour runtime
+#$ -l h_vmem=4G   # Request 4GB RAM
+#$ -t 1-62
+##$ -l node_type=ddy
+
+INPUT_FILE=$(sed -n "${SGE_TASK_ID}p" list-paired)
+
+module load fastqc
+
+
+fastqc $INPUT_FILE

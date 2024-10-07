@@ -1,0 +1,17 @@
+#!/bin/bash
+#$ -cwd           # Set the working directory for the job to the current directory
+#$ -j y                   ## Create an output file with errors etc.
+#$ -pe smp 1
+#$ -l h_rt=48:0:0
+#$ -l h_vmem=8G
+#$ -t 1-62
+##$ -l node_type=ddy
+
+INPUT_FILE=$(sed -n "${SGE_TASK_ID}p" list)
+
+java -jar trimmomatic.jar PE -threads ${NSLOTS} \
+"$INPUT_FILE"_1.fq.gz "$INPUT_FILE"_2.fq.gz \
+"$INPUT_FILE"_1_paired.fq.gz "$INPUT_FILE"_1_unpaired.fq.gz \
+"$INPUT_FILE"_2_paired.fq.gz "$INPUT_FILE"_2_unpaired.fq.gz \
+ILLUMINACLIP:TruSeq3-PE.fa:2:30:10 LEADING:5 TRAILING:5 SLIDINGWINDOW:4:15 MINLEN:70 HEADCROP:10
+

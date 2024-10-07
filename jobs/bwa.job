@@ -1,0 +1,16 @@
+#!/bin/bash
+#$ -cwd           # Set the working directory for the job to the current directory
+#$ -j y                   ## Create an output file with errors etc.
+#$ -pe smp 6
+#$ -l h_rt=24:0:0
+#$ -l h_vmem=8G
+#$ -t 1-245
+##$ -l node_type=ddy
+
+INPUT=$(sed -n "${SGE_TASK_ID}p" list)
+
+
+bwa-mem2 mem -t ${NSLOTS} \
+-R "@RG\tID:$INPUT\tLB:$INPUT\tPL:ILLUMINA\tPM:DNBseq\tSM:$INPUT" \
+sequences/americana \
+trimmed/"$INPUT"_1_paired.fq.gz trimmed/"$INPUT"_2_paired.fq.gz | samtools sort  -@6 -o "$INPUT".bam -
