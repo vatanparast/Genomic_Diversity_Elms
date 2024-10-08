@@ -14,7 +14,7 @@ For the details about the project, please see the project page at the [Center fo
 - Trim the raw files using [Trimmomatic](https://github.com/timflutre/trimmomatic), [FASTP](https://github.com/OpenGene/fastp) or [Cutadapt](https://cutadapt.readthedocs.io/en/stable/).
 - Run FASTQC on trimmed files.
 - Run [MultiQC](https://github.com/MultiQC/MultiQC) to aggregate FASTQC results into a single HTML file (raw and trimmed separately) for better visualization. Check the “Sequence GC content”, “Overrepresented sequences”, “Adapter Content”, etc. Exclude erroneous sample(s).
-- Map the raw reads against the reference genome using [BWA version 2](https://github.com/bwa-mem2/bwa-mem2) ‘mem’ algorithm.
+- Map the raw reads against the reference genome, *Ulmus americana* [GCA_010015005.3](https://www.ncbi.nlm.nih.gov/datasets/genome/GCA_010015005.3/) using [BWA version 2](https://github.com/bwa-mem2/bwa-mem2) ‘mem’ algorithm.
 - 
 
 
